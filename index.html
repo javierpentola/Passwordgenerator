@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Password Generator</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #1c1c1c;
+        }
+        :root {
+            --mainfont: 'Inter', sans-serif;
+            --headlinefont: 'Karla', sans-serif;
+        }
+        main {
+            margin: 6rem auto;
+            background-color: #1f2937;
+            color: #fff;
+            font-family: var(--mainfont);
+            max-width: 600px;
+            padding: 1.5rem;
+        }
+        div {
+            margin-bottom: 0.5rem;
+        }
+        h1 {
+            margin: 0 auto;
+        }
+        h1 > span {
+            color: #55f991;
+            display: block;
+        }
+        h2 {
+            margin: 1rem auto 0;
+            font-family: var(--headlinefont);
+        }
+        .buttons {
+            display: flex;
+            border-bottom: 1px solid #2f3e53;
+        }
+        button {
+            margin: 1rem 0.5rem 1rem auto;
+            padding: 0.5rem 1rem;
+            width: 100%;
+            border-radius: 6px;
+            border: none;
+            color: #fff;
+            background-color: #10b981;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        label {
+            font-weight: bold;
+        }
+        button:hover {
+            cursor: pointer;
+            background-color: #10c991;
+            transition: all 0.3s;
+        }
+        input:hover {
+            cursor: pointer;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input:focus::placeholder {
+            color: transparent;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        button > img {
+            width: 1rem;
+            height: auto;
+        }
+        button > span {
+            padding: 8px 6px;
+        }
+        input[type="number"] {
+            width: 100%;
+            margin: 1rem auto 1rem 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: none;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        .input--password {
+            background-repeat: no-repeat;
+            width: auto;
+            height: 2.2rem;
+            background-color: #273549;
+            background-position: center;
+            color: #55f991;
+            border: none;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            justify-content: space-between;
+            gap: 1rem;
+            margin: 1rem auto 0;
+        }
+        .input--password:focus {
+            background-image: none;
+        }
+        .error-message {
+            color: red;
+            visibility: hidden;
+            margin: 1.5rem auto 1rem;
+            display: block;
+        }
+        .visibility {
+            visibility: visible;
+        }
+        .message {
+            color: #55f991;
+            margin: 1.5rem auto 1rem;
+            display: block;
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 2.5rem;
+            height: 7px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 5px;
+            background-image: linear-gradient(#55f991, #55f991);
+            background-size: 50% 100%;
+            background-repeat: no-repeat;
+            cursor: pointer;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #55f991;
+            cursor: pointer;
+            box-shadow: 0 0 2px 0 #555;
+            transition: background 0.3s ease-in-out;
+        }
+        input[type="range"]::-moz-range-thumb {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #55f991;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+        input[type="range"]::-ms-thumb {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #55f991;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+        @media screen and (max-width: 550px) {
+            main {
+                margin: 4rem auto;
+                width: 82.5%;
+                border-radius: 5px;
+            }
+            section {
+                grid-template-columns: 1fr;
+            }
+            .buttons {
+                flex-direction: column;
+            }
+            .input--password {
+                width: 100%;
+            }
+            input[type="number"] {
+                margin: 1rem 0rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Karla:wght@800&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <main>
+        <header>
+            <h1>Generate a <span> random password</span></h1>
+            <h2>Never use an insecure password again.</h2>
+        </header>
+        <div class="buttons">
+            <button>
+                <span>Generate passwords</span>
+            </button>
+            <input placeholder="Password length" type="number" id="passwordLength" class="input-second" />
+        </div>
+        <section class="input-container">
+            <input type="text" class="input--password" id="firstPassword" />
+            <input type="text" class="input--password" id="secondPassword" />
+            <input type="text" class="input--password" id="thirdPassword" />
+            <input type="text" class="input--password" id="fourthPassword" />
+        </section>
+        <p class="error-message">message</p>
+        <div>
+            <label>Special characters</label>
+            <input type="range" min="0" max="1" value="1" id="special-char" />
+        </div>
+        <div>
+            <label>Uppercase</label>
+            <input type="range" min="0" max="1" value="1" id="uppercase" />
+        </div>
+    </main>
+    <script>
+        const length = document.getElementById("passwordLength");
+        const button = document.querySelector("button");
+        const passwords = document.querySelectorAll(".input--password");
+        const specialChar = document.getElementById("special-char");
+        const uppercase = document.getElementById("uppercase");
+        const message = document.querySelector(".error-message");
+
+        const randomItem = (arr) => arr[(Math.random() * arr.length) | 0];
+
+        function randomChar() {
+            let randomNumber = Math.round(126 - Math.random() * 93);
+            let char = String.fromCharCode(randomNumber);
+            return char;
+        }
+
+        function makePassword(length, word) {
+            let arrayOfChar = generateString(+length);
+            const arrayOfNum = [];
+
+            for (let i = 0; i < length; i++) {
+                arrayOfNum.push(i);
+            }
+
+            let Num = randomItem(arrayOfNum);
+
+            if (uppercase.value == 1 && specialChar.value == 1) {
+                for (let i = 0; i < length; i++) {
+                    word += randomChar(length);
+                }
+            } else if (uppercase.value == 1 && specialChar.value == 0) {
+                let item = randomItem(arrayOfChar);
+                let item2 = randomItem(arrayOfChar);
+                for (let i = Num; i < length; i++) {
+                    arrayOfChar.splice(arrayOfChar.indexOf(item), 1, item2.toUpperCase());
+                }
+                word += arrayOfChar.join("");
+            } else {
+                word += arrayOfChar.join("");
+            }
+            return word;
+        }
+
+        function generatePassword() {
+            let word = "";
+            message.classList.remove("visibility");
+            if (length.value <= 0) {
+                return displayErrorMessage();
+            } else if (length.value > 20) {
+                return displayErrorLengthMessage();
+            } else {
+                passwords.forEach((password) => {
+                    return (password.value = makePassword(length.value, word));
+                });
+            }
+        }
+
+        function displayErrorMessage() {
+            message.classList.add("visibility");
+            message.classList.remove("message");
+            message.textContent = "Password must have at least one character";
+        }
+
+        function displayErrorLengthMessage() {
+            message.classList.add("visibility");
+            message.classList.remove("message");
+            message.textContent = "Password will cause problems if more than 20 characters long";
+        }
+
+        function copyMessage() {
+            message.classList.add("visibility");
+            message.classList.add("message");
+            message.textContent = "Password copied";
+        }
+
+        function copyToClipboard() {
+            this.select();
+            this.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(this.value);
+            if (this.value != "") {
+                copyMessage();
+            }
+        }
+
+        button.addEventListener("click", generatePassword);
+
+        passwords.forEach((password) => {
+            password.addEventListener("click", copyToClipboard);
+        });
+
+        const generateString = (howLong) =>
+            Array(howLong)
+                .fill("")
+                .map(() => Math.random().toString(36).charAt(2));
+    </script>
+</body>
+</html>
